@@ -7,7 +7,7 @@ class GameInterface(ABC):
         pass
 
     @abstractmethod
-    def get_table():
+    def table():
         pass
 
     @abstractmethod
@@ -24,6 +24,10 @@ class GameInterface(ABC):
 
     @abstractmethod
     def get_ltr_diagonal():
+        pass
+
+    @abstractmethod
+    def set_point():
         pass
 
 
