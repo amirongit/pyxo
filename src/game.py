@@ -39,3 +39,18 @@ class Game(GameInterface):
 
     def add_counter(self):
         self._counter += 1
+
+
+def check_for_winner(game: Game) -> tuple[bool, str]:
+    for row in range(3):
+        if all(['' if item == '-' else item for item in game.get_row(row)]):
+            return (True, game.get_row(row)[0])
+    for column in range(3):
+        if all(['' if item == '-' else item
+                for item in game.get_column(column)]):
+            return (True, game.get_row(column)[0])
+    if all(['' if item == '-' else item for item in game.get_rtl_diagonal()]):
+        return (True, game.get_rtl_diagonal()[0])
+    if all(['' if item == '-' else item for item in game.get_ltr_diagonal()]):
+        return (True, game.get_ltr_diagonal()[0])
+    return (False, '')
