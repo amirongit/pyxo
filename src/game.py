@@ -2,10 +2,7 @@ from interfaces import GameInterface, PlayerInterface
 
 
 class Game(GameInterface):
-    def __init__(self, first_player: PlayerInterface,
-                 second_player: PlayerInterface):
-        self.fir_player = first_player
-        self.sec_player = second_player
+    def __init__(self):
         self.reset_game()
 
     def reset_game(self):
