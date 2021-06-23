@@ -35,6 +35,8 @@ class Game(GameInterface):
         return [self.table[index][index] for index in range(3)]
 
     def set_point(self, point: tuple[int, int], value: str):
+        if self.table[point[0]][point[1]] != '-':
+            raise IndexError
         self._table[point[0]][point[1]] = value
 
     def add_counter(self):
