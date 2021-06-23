@@ -7,11 +7,6 @@ class Game(GameInterface):
 
     def reset_game(self):
         self._table = [['-' for point in range(3)] for row in range(3)]
-        self._counter = 0
-
-    @property
-    def counter(self) -> int:
-        return self._counter
 
     @property
     def table(self) -> list:
@@ -38,9 +33,6 @@ class Game(GameInterface):
         if self.table[point[0]][point[1]] != '-':
             raise IndexError
         self._table[point[0]][point[1]] = value
-
-    def add_counter(self):
-        self._counter += 1
 
 
 def check_for_winner(game: Game) -> tuple[bool, str]:
