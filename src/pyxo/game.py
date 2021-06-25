@@ -34,17 +34,55 @@ class Game(GameInterface):
             raise IndexError
         self._table[point[0]][point[1]] = value
 
+    def is_full(self) -> bool:
+        for row in self.table:
+            for point in row:
+                if point == '-':
+                    return False
+        return True
 
-def check_for_winner(game: GameInterface) -> tuple[bool, str]:
+
+def check_for_winner(game: Game) -> str:
+    if res := check_for_row_winner(game):
+        return res
+    if res := check_for_column_winner(game):
+        return res
+    if res := check_for_rtl_diagonal_winner(game):
+        return res
+    if res := check_for_ltr_diagonal_winner(game):
+        return res
+    return ''
+
+
+def check_for_row_winner(game: Game) -> str:
     for row in range(3):
-        if all(['' if item == '-' else item for item in game.get_row(row)]):
-            return (True, game.get_row(row)[0])
+        processed_row = ['' if item == '-' else item
+                         for item in game.get_row(row)]
+        if all(processed_row) and len(set(processed_row)) == 1:
+            return game.get_row(row)[0]
+    return ''
+
+
+def check_for_column_winner(game: Game) -> str:
     for column in range(3):
-        if all(['' if item == '-' else item
-                for item in game.get_column(column)]):
-            return (True, game.get_row(column)[0])
-    if all(['' if item == '-' else item for item in game.get_rtl_diagonal()]):
-        return (True, game.get_rtl_diagonal()[0])
-    if all(['' if item == '-' else item for item in game.get_ltr_diagonal()]):
-        return (True, game.get_ltr_diagonal()[0])
-    return (False, '')
+        processed_column = ['' if item == '-' else item
+                            for item in game.get_column(column)]
+        if all(processed_column) and len(set(processed_column)) == 1:
+            return game.get_row(column)[0]
+    return ''
+
+
+def check_for_rtl_diagonal_winner(game: Game) -> str:
+    processed_rtl_diagonal = ['' if item == '-' else item
+                              for item in game.get_rtl_diagonal()]
+    if all(processed_rtl_diagonal) and len(set(processed_rtl_diagonal)) == 1:
+        return game.get_rtl_diagonal()[0]
+    return ''
+
+
+def check_for_ltr_diagonal_winner(game: Game) -> str:
+    processed_ltr_diagonal = ['' if item == '-' else item
+                              for item in game.get_ltr_diagonal()]
+    if all(processed_ltr_diagonal) and len(set(processed_ltr_diagonal)) == 1:
+        return game.get_ltr_diagonal()[0]
+    return ''
