@@ -35,7 +35,7 @@ class Game(GameInterface):
         self._table[point[0]][point[1]] = value
 
 
-def check_for_winner(game: Game) -> tuple[bool, str]:
+def check_for_winner(game: GameInterface) -> tuple[bool, str]:
     for row in range(3):
         if all(['' if item == '-' else item for item in game.get_row(row)]):
             return (True, game.get_row(row)[0])
