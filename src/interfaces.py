@@ -3,35 +3,39 @@ from abc import ABC, abstractmethod
 
 class GameInterface(ABC):
     @abstractmethod
-    def reset_game():
+    def reset_game(self):
         pass
 
     @abstractmethod
-    def table():
+    def table(self) -> list:
         pass
 
     @abstractmethod
-    def get_row():
+    def get_row(self, index) -> list:
         pass
 
     @abstractmethod
-    def get_column():
+    def get_column(self, index) -> list:
         pass
 
     @abstractmethod
-    def get_rtl_diagonal():
+    def get_rtl_diagonal(self) -> list:
         pass
 
     @abstractmethod
-    def get_ltr_diagonal():
+    def get_ltr_diagonal(self) -> list:
         pass
 
     @abstractmethod
-    def set_point():
+    def set_point(self, point, value):
         pass
 
 
 class PlayerInterface(ABC):
     @abstractmethod
-    def mark():
+    def game(self) -> GameInterface:
+        pass
+
+    @abstractmethod
+    def mark(self, point):
         pass
