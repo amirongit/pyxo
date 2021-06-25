@@ -1,4 +1,4 @@
-from interfaces import GameInterface
+from .interfaces import GameInterface
 
 
 class Game(GameInterface):
