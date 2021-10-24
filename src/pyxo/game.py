@@ -6,7 +6,7 @@ class Game(GameInterface):
         self.reset_game()
 
     def reset_game(self):
-        self._table = [['-' for point in range(3)] for row in range(3)]
+        self._table = [['-' for _ in range(3)] for _ in range(3)]
 
     @property
     def table(self) -> list:
@@ -68,7 +68,7 @@ def check_for_column_winner(game: Game) -> str:
         processed_column = ['' if item == '-' else item
                             for item in game.get_column(column)]
         if all(processed_column) and len(set(processed_column)) == 1:
-            return game.get_row(column)[0]
+            return game.get_column(column)[0]
     return ''
 
 
